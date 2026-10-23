@@ -7,6 +7,9 @@ from telegram.ext import Application, CommandHandler, MessageHandler, filters, C
 logging.basicConfig(
     format='%(asctime)s - %(name)s - %(levelname)s - %(message)s', level=logging.INFO
 )
+# Скрываем INFO-логи httpx
+logging.getLogger("httpx").setLevel(logging.WARNING)
+
 logger = logging.getLogger(__name__)
 
 # Применяем nest_asyncio для корректной работы asyncio в Colab
