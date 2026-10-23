@@ -1,10 +1,10 @@
-import os
 import logging
 import nest_asyncio
+import os
 from telegram import Update
 from telegram.ext import Application, CommandHandler, MessageHandler, filters, ContextTypes
 
-# Настройка логирования для вывода в консоль
+# Настройка логирования
 logging.basicConfig(
     format='%(asctime)s - %(name)s - %(levelname)s - %(message)s', level=logging.INFO
 )
@@ -13,7 +13,6 @@ logger = logging.getLogger(__name__)
 # Применяем nest_asyncio для корректной работы asyncio в Colab
 nest_asyncio.apply()
 
-# Токен вашего бота
 TOKEN = os.environ.get('BOT_TOKEN')
 
 async def start(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
@@ -35,16 +34,16 @@ async def echo(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
 
 def main() -> None:
     """Запуск бота."""
+    # close_loop=False решает проблему 'Cannot close a running event loop' в Colab
     application = Application.builder().token(TOKEN).build()
-
+    logger.info("запуск Майн ")
+    
     # Регистрация обработчиков
     application.add_handler(CommandHandler("start", start))
     application.add_handler(MessageHandler(filters.TEXT & ~filters.COMMAND, echo))
 
     print("Бот запущен...")
-    application.run_polling(allowed_updates=Update.ALL_TYPES)
+    application.run_polling(allowed_updates=Update.ALL_TYPES, close_loop=False)
 
 if __name__ == "__main__":
-    # Вы можете раскомментировать main() и запустить ячейку для старта бота
     main()
-    
