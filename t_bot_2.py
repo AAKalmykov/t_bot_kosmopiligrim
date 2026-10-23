@@ -1,5 +1,4 @@
 import logging
-import nest_asyncio
 import os
 from telegram import Update
 from telegram.ext import Application, CommandHandler, MessageHandler, filters, ContextTypes
@@ -11,12 +10,12 @@ logging.basicConfig(
 logger = logging.getLogger(__name__)
 
 # Применяем nest_asyncio для корректной работы asyncio в Colab
-nest_asyncio.apply()
+# (nest_asyncio removed: not needed on a server; it breaks httpx on Python 3.14)
+# nest_asyncio.apply()
 
 TOKEN = os.environ.get('BOT_TOKEN')
 
 async def start(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
-    logger.info("запуск Старт")
     """Отправляет приветственное сообщение при команде /start и записывает это в лог."""
     user = update.effective_user
     logger.info("Команда /start вызвана пользователем: %s (ID: %s)", user.full_name, user.id)
