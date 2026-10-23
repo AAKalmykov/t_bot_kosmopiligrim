@@ -33,6 +33,7 @@ async def echo(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     await update.message.reply_text(text)
 
 def main() -> None:
+    logger.info("запуск Бота")
     """Запуск бота."""
     # close_loop=False решает проблему 'Cannot close a running event loop' в Colab
     application = Application.builder().token(TOKEN).build()
