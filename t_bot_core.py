@@ -5,7 +5,7 @@
 # - TeleGram
 # - GigaChat
 
-import pandas as pd
+# import pandas as pd
 import telebot
 import os
 
