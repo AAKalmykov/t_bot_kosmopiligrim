@@ -1,0 +1,2 @@
+# t_bot_kosmopiligrim
+t_bot_kosmopiligrim
