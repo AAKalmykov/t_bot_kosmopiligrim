@@ -16,6 +16,7 @@ nest_asyncio.apply()
 TOKEN = os.environ.get('BOT_TOKEN')
 
 async def start(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
+    logger.info("запуск Старт")
     """Отправляет приветственное сообщение при команде /start и записывает это в лог."""
     user = update.effective_user
     logger.info("Команда /start вызвана пользователем: %s (ID: %s)", user.full_name, user.id)
